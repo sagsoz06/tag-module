@@ -1,13 +1,8 @@
 {
     "name": "Tag",
     "alias": "tag",
-    "version": "2.0.0",
-    "description": "Tag management in AsgardCMS",
-    "keywords": [
-        "Tag",
-        "AsgardCMS",
-        "taggable"
-    ],
+    "version": "2.0.2",
+    "description": "Tag management in CMS",
     "active": 1,
     "order": 80,
     "providers": [
