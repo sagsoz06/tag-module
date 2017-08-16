@@ -1,7 +1,7 @@
 {
     "name": "Tag",
     "alias": "tag",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "description": "Tag management in CMS",
     "active": 1,
     "order": 80,

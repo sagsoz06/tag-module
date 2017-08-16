@@ -181,9 +181,6 @@ trait TaggableTrait
             ->where('namespace', $this->getEntityClassName())
             ->with('translations')
             ->whereHas('translations', function (Builder $q) use ($name) {
-//There is a problem when detach process, only added command where slug and fixed
-//                $q->orWhere('name', $this->generateTagSlug($name));
-//                $q->orWhere('slug', $this->generateTagSlug($name));
                 $q->where('slug', $this->generateTagSlug($name));
             })->first();
 

@@ -4,6 +4,10 @@ namespace Modules\Tag\Repositories\Eloquent;
 
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
+use Modules\Tag\Events\TagIsCreating;
+use Modules\Tag\Events\TagIsUpdating;
+use Modules\Tag\Events\TagWasCreated;
+use Modules\Tag\Events\TagWasUpdated;
 use Modules\Tag\Repositories\TagRepository;
 
 class EloquentTagRepository extends EloquentBaseRepository implements TagRepository
@@ -23,5 +27,25 @@ class EloquentTagRepository extends EloquentBaseRepository implements TagReposit
         return $this->model->whereHas('translations', function (Builder $query) use ($slug) {
             $query->where('slug', $slug);
         })->with('translations')->first();
+    }
+
+    public function create($data)
+    {
+        event($event = new TagIsCreating($data));
+        $tag = $this->model->create($event->getAttributes());
+
+        event(new TagWasCreated($tag));
+
+        return $tag;
+    }
+
+    public function update($tag, $data)
+    {
+        event($event = new TagIsUpdating($tag, $data));
+        $tag->update($event->getAttributes());
+
+        event(new TagWasUpdated($tag));
+
+        return $tag;
     }
 }

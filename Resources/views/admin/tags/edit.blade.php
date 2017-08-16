@@ -11,10 +11,6 @@
     </ol>
 @stop
 
-@section('styles')
-    {!! Theme::script('js/vendor/ckeditor/ckeditor.js') !!}
-@stop
-
 @section('content')
     {!! Form::open(['route' => ['admin.tag.tag.update', $tag->id], 'method' => 'put']) !!}
     <div class="row">
@@ -63,7 +59,7 @@
     </dl>
 @stop
 
-@section('scripts')
+@push('js-stack')
     <script type="text/javascript">
         $( document ).ready(function() {
             $('.selectize').selectize();
@@ -82,4 +78,4 @@
             });
         });
     </script>
-@stop
+@endpush
