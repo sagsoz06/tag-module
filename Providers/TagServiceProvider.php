@@ -8,6 +8,7 @@ use Modules\Core\Traits\CanGetSidebarClassForModule;
 use Modules\Core\Traits\CanPublishConfiguration;
 use Modules\Tag\Blade\TagWidget;
 use Modules\Tag\Entities\Tag;
+use Modules\Tag\Events\Handlers\ClearCache;
 use Modules\Tag\Events\Handlers\RegisterTagSidebar;
 use Modules\Tag\Repositories\Cache\CacheTagDecorator;
 use Modules\Tag\Repositories\Eloquent\EloquentTagRepository;
@@ -42,6 +43,8 @@ class TagServiceProvider extends ServiceProvider
             BuildingSidebar::class,
             $this->getSidebarClassForModule('tag', RegisterTagSidebar::class)
         );
+
+        $this->app->events->subscribe(new ClearCache());
     }
 
     public function boot()
